@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_fe_grocery/data.dart';
 import 'package:flutter_fe_grocery/shared/theme.dart';
+import 'package:flutter_fe_grocery/shared/widget_item.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,6 +28,14 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  final data = Product(
+    'Bayam',
+    '2.000',
+    '1 ikat',
+    'assets/images/img1.png',
+    'Sayur dan buah-buahan',
+  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,6 +97,21 @@ class _MainPageState extends State<MainPage> {
             ],
           ),
         ],
+      ),
+      body: Container(
+        padding: const EdgeInsets.all(10),
+        child: GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 10,
+            crossAxisCount: 2,
+            childAspectRatio: 0.6,
+          ),
+          itemBuilder: (context, index) {
+            return ItemWidget(product: allData[index]);
+          },
+          itemCount: allData.length,
+        ),
       ),
     );
   }
